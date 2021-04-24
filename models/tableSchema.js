@@ -19,6 +19,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    bill: {
+        type: Number,
+        required: true
+    },
     totalOrder : [{
         type : Object,
         required: true

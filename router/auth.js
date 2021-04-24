@@ -220,7 +220,7 @@ router.post('/addorder', async (req, res) => {
     //    console.log( req.body);
 
 
-    const { tableNo, totalOrder } = req.body
+    const { tableNo, total, totalOrder } = req.body
     // console.log(order);
 
     if (!totalOrder) {
@@ -241,18 +241,18 @@ router.post('/addorder', async (req, res) => {
 
 
                 const kitchenorder = new KitchenOrder({ tableNo, totalOrder });
-                const receptionorder = new ReceptionOrder({ tableNo, totalOrder });
+                const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder });
 
                 kitchenorder.save().then(() => {
-                    res.status(201).json({ message: "drink added" })
+                    res.status(201).json({ message: "order added" })
                 }).catch((err) => {
                     res.status(500).json({ error: "failed to registered" })
                 })
-                receptionorder.save().then(() => {
-                    res.status(201).json({ message: "drink added" })
-                }).catch((err) => {
-                    res.status(500).json({ error: "failed to registered" })
-                })
+                // receptionorder.save().then(() => {
+                //     res.status(201).json({ message: "order added" })
+                // }).catch((err) => {
+                //     res.status(500).json({ error: "failed to registered" })
+                // })
             }
 
         }).catch((err) => {
@@ -263,17 +263,19 @@ router.post('/addorder', async (req, res) => {
 
 });
 
-router.get('/getorder', async (req, res) => {
+router.get('/getkitchenorder', async (req, res) => {
+
 
     try {
 
-        const orders = await Order.find({});
+        const orders = await KitchenOrder.find({});
         console.log(orders);
         res.send({data : orders})
 
     } catch (error) {
 
     }
+    
 
 })
 
