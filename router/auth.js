@@ -67,6 +67,7 @@ router.post('/addtable', (req, res) => {
 
 // signin tables ruter 
 
+
 router.post('/login', async (req, res) => {
     console.log(req.body);
     try {
@@ -86,7 +87,7 @@ router.post('/login', async (req, res) => {
             console.log(tableLogin.password);
             if (tableLogin.password === password) {
                 console.log("matched");
-                return res.json({ message: "user valid" })
+                return res.json({ message: tableLogin })
 
             } else {
                 console.log("not matched ");
@@ -240,7 +241,7 @@ router.post('/addorder', async (req, res) => {
 
 
 
-                const kitchenorder = new KitchenOrder({ tableNo, totalOrder });
+                const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder });
                 const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder });
 
                 kitchenorder.save().then(() => {
@@ -275,7 +276,7 @@ router.get('/getkitchenorder', async (req, res) => {
     } catch (error) {
 
     }
-    
+
 
 })
 
